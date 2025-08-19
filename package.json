@@ -1,0 +1,28 @@
+{
+	"name": "creview",
+	"private": true,
+	"scripts": {
+		"dev": "turbo run dev",
+		"convex": "convex dev",
+		"build": "turbo run build",
+		"lint": "turbo run lint",
+		"check-types": "turbo run check-types"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.0",
+		"turbo": "^2.5.6",
+		"typescript": "5.9.2"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"packageManager": "bun@1.2.18",
+	"workspaces": [
+		"apps/*",
+		"packages/*",
+		"convex"
+	],
+	"dependencies": {
+		"convex": "^1.25.4"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"extends": "../../tsconfig.json",
+	"include": ["**/*.ts", "**/*.tsx", "../../convex/**/*.ts"],
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"types": ["vite/client"],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@convex-gen/*": ["../../convex/_generated/*"]
+		}
+	}
+}

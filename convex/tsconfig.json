@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"noEmit": true,
+		"moduleResolution": "bundler",
+		"skipLibCheck": true
+	}
+}
