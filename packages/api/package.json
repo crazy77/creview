@@ -1,0 +1,13 @@
+{
+	"name": "@creview/api",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "convex dev"
+	},
+	"dependencies": {
+		"@auth/core": "0.37.0",
+		"@convex-dev/auth": "^0.0.88",
+		"convex": "^1.25.4"
+	}
+}

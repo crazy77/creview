@@ -3,7 +3,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "turbo run dev",
-		"convex": "convex dev",
+		"convex": "cd packages/api && bun run dev",
 		"build": "turbo run build",
 		"lint": "turbo run lint",
 		"check-types": "turbo run check-types"
@@ -19,8 +19,7 @@
 	"packageManager": "bun@1.2.18",
 	"workspaces": [
 		"apps/*",
-		"packages/*",
-		"convex"
+		"packages/*"
 	],
 	"dependencies": {
 		"convex": "^1.25.4"

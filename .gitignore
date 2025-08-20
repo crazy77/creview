@@ -37,5 +37,15 @@ yarn-error.log*
 .DS_Store
 *.pem
 
-# Convex
-convex/_generated
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+count.txt
+.env
+.nitro
+.tanstack
+.output
+.vinxi
+todos.json
