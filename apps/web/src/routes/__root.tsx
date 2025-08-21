@@ -8,7 +8,6 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import Header from "@/components/Header";
-
 import appCss from "@/styles.css?url";
 
 export const Route = createRootRouteWithContext<{

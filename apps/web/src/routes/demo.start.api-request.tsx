@@ -5,6 +5,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Authenticated, Unauthenticated } from "convex/react";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import { Loader } from "@/components/Loader";
 import { useMe } from "@/hooks/useMe";
 
 async function getNames() {
@@ -22,6 +24,14 @@ export const Route = createFileRoute("/demo/start/api-request")({
 		);
 	},
 	component: Home,
+	head: () => ({
+		meta: [
+			{
+				title: "Names List",
+			},
+		],
+	}),
+	pendingComponent: Loader,
 });
 
 function Home() {
@@ -31,9 +41,10 @@ function Home() {
 	useEffect(() => {
 		getNames().then(setNames);
 		getSex().then(setSex);
+		toast.success("Hello");
 	}, []);
 
-	const { data } = useSuspenseQuery(convexQuery(api.tasks.get, {}));
+	const { data, isLoading } = useSuspenseQuery(convexQuery(api.tasks.get, {}));
 	const user = useMe();
 
 	return (
@@ -78,6 +89,7 @@ function Home() {
 					))}
 				</ul>
 				<p className="text-lg text-white">{sex.sex}</p>
+				{isLoading && <Loader />}
 				<ul className="mb-4 space-y-2">
 					{data.map((task) => (
 						<li

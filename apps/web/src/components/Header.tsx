@@ -1,12 +1,19 @@
 import { useAuthActions } from "@convex-dev/auth/react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { Authenticated, Unauthenticated } from "convex/react";
 
 import { useMe } from "@/hooks/useMe";
 
 export default function Header() {
 	const { signIn, signOut } = useAuthActions();
+	const router = useRouter();
+	console.log(router.latestLocation);
 	const user = useMe();
+	const onSignIn = () => {
+		signIn("kakao", {
+			redirectTo: router.latestLocation.href,
+		});
+	};
 	return (
 		<header className="p-2 flex gap-2 bg-white text-black justify-between">
 			<nav className="flex flex-row items-center justify-between w-full">
@@ -44,7 +51,7 @@ export default function Header() {
 						</button>
 					</Authenticated>
 					<Unauthenticated>
-						<button onClick={() => void signIn("kakao")} type="button">
+						<button onClick={onSignIn} type="button">
 							Sign in with kakao
 						</button>
 					</Unauthenticated>
