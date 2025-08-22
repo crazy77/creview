@@ -3,11 +3,11 @@ import { Link, useRouter } from "@tanstack/react-router";
 import { Authenticated, Unauthenticated } from "convex/react";
 
 import { useMe } from "@/hooks/useMe";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
 	const { signIn, signOut } = useAuthActions();
 	const router = useRouter();
-	console.log(router.latestLocation);
 	const user = useMe();
 	const onSignIn = () => {
 		signIn("kakao", {
@@ -55,6 +55,7 @@ export default function Header() {
 							Sign in with kakao
 						</button>
 					</Unauthenticated>
+					<ThemeToggle />
 				</div>
 			</nav>
 		</header>

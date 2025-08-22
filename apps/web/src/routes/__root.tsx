@@ -3,11 +3,13 @@ import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
+	Outlet,
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-
 import Header from "@/components/Header";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { getThemeServerFn } from "@/lib/theme";
 import appCss from "@/styles.css?url";
 
 export const Route = createRootRouteWithContext<{
@@ -33,16 +35,30 @@ export const Route = createRootRouteWithContext<{
 			},
 		],
 	}),
+	loader: () => getThemeServerFn(),
 	notFoundComponent: () => <div>Not Found</div>,
-
-	shellComponent: RootDocument,
+	shellComponent: RootComponent,
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootComponent() {
+	const data = Route.useLoaderData();
 	return (
-		<html lang="en">
+		<ThemeProvider theme={data}>
+			<RootDocument>
+				<Outlet />
+			</RootDocument>
+		</ThemeProvider>
+	);
+}
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+	const theme = Route.useLoaderData();
+
+	return (
+		<html lang="ko" className={theme} suppressHydrationWarning>
 			<head>
 				<HeadContent />
+				<script src="/theme-snippet.js" />
 			</head>
 			<body>
 				<Header />
