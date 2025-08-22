@@ -18,6 +18,9 @@ export function ThemeProvider({ children, theme }: Props) {
 	}
 	useEffect(() => {
 		const mq = window.matchMedia("(prefers-color-scheme: dark)");
+		if (theme === "system") {
+			document.documentElement.classList.toggle("dark", mq.matches);
+		}
 		const handler = (e: MediaQueryListEvent) => {
 			if (theme === "system") {
 				document.documentElement.classList.toggle("dark", e.matches);

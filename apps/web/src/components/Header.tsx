@@ -1,4 +1,10 @@
 import { useAuthActions } from "@convex-dev/auth/react";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@creview/ui/src/components/dropdown-menu";
 import { Link, useRouter } from "@tanstack/react-router";
 import { Authenticated, Unauthenticated } from "convex/react";
 
@@ -13,6 +19,9 @@ export default function Header() {
 		signIn("kakao", {
 			redirectTo: router.latestLocation.href,
 		});
+	};
+	const handleItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
+		e.preventDefault();
 	};
 	return (
 		<header className="p-2 flex gap-2 bg-white text-black justify-between">
@@ -34,28 +43,35 @@ export default function Header() {
 						<Link to="/abc">ABC</Link>
 					</div>
 				</div>
-				<div>
+				<div className="flex items-center gap-2">
 					<Authenticated>
-						<button
-							onClick={() => void signOut()}
-							type="button"
-							className="flex items-center gap-2"
-						>
-							<img
-								src={user?.image}
-								alt={user?.name}
-								className="w-10 h-10 rounded-full"
-							/>
-							{user?.name}
-							Sign out
-						</button>
+						{user?.name}
+						<DropdownMenu>
+							<DropdownMenuTrigger>
+								<img
+									src={user?.image}
+									alt={user?.name}
+									className="w-10 h-10 rounded-full"
+								/>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent>
+								<DropdownMenuItem>dkdkd</DropdownMenuItem>
+								<DropdownMenuItem onClick={handleItemClick}>
+									<ThemeToggle />
+								</DropdownMenuItem>
+								<DropdownMenuItem>
+									<button onClick={() => void signOut()} type="button">
+										Sign out
+									</button>
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
 					</Authenticated>
 					<Unauthenticated>
 						<button onClick={onSignIn} type="button">
 							Sign in with kakao
 						</button>
 					</Unauthenticated>
-					<ThemeToggle />
 				</div>
 			</nav>
 		</header>
